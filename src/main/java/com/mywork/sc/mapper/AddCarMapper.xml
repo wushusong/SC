@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper创建，并设置名字，方便核心配置文件（mybatis）找到，名字就是该文件的全路径 -->
+<mapper namespace="com.mywork.sc.mapper.AddCarMapper">
+
+
+
+    <select id="getSkuId" resultType="java.lang.Integer">
+        select sku_id skuId from goods_sku where sku_properties = #{skuProperties} and goods_id=#{goodsId}
+    </select>
+
+    <update id="addCart">
+        update cart set total_price=#{totalPrice},total_num=#{buyNum} where cart_id = #{cartId}
+    </update>
+
+    <insert id="addCartInfo">
+        insert into cart_info values (null,#{cartId},#{skuId},#{buyNum},now())
+    </insert>
+
+</mapper>

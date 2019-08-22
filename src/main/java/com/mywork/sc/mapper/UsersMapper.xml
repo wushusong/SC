@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper创建，并设置名字，方便核心配置文件（mybatis）找到，名字就是该文件的全路径 -->
+<mapper namespace="com.mywork.sc.mapper.UsersMapper">
+
+    <resultMap type="Users" id="getUser">
+        <id column="user_id" property="userId"/>
+        <result column="uname" property="uname"/>
+        <result column="upwd" property="upwd"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="sex" property="sex"/>
+        <result column="acname" property="acname"/>
+        <result column="id_card" property="idCard"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="tel" property="tel"/>
+        <result column="qq" property="qq"/>
+        <collection property="cartList" ofType="Cart">
+            <id column="cart_id" property="cartId"/>
+            <result column="total_price" property="totalPrice"/>
+            <result column="total_num" property="totalNum"/>
+            <collection property="cartInfoList" ofType="CartInfo">
+                <result column="sku_id" property="skuId"/>
+                <result column="buy_num" property="buyNum"/>
+            </collection>
+        </collection>
+
+    </resultMap>
+
+    <select id="getUserByUname" parameterType="Users" resultMap="getUser">
+        select * from user_info where uname = #{uname}
+    </select>
+
+
+</mapper>

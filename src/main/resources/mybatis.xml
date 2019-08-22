@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.mywork.sc.entity.Users" alias="Users"/>
+
+        <typeAlias type="com.mywork.sc.entity.Category" alias="Category"/>
+
+        <typeAlias type="com.mywork.sc.entity.Goods" alias="Goods"/>
+
+        <typeAlias type="com.mywork.sc.entity.AttributeName" alias="AttributeName"/>
+
+        <typeAlias type="com.mywork.sc.entity.AttributeValue" alias="AttributeValue"/>
+
+        <typeAlias type="com.mywork.sc.entity.Cart" alias="Cart"/>
+
+        <typeAlias type="com.mywork.sc.entity.CartInfo" alias="CartInfo"/>
+
+        <typeAlias type="com.mywork.sc.entity.GoodsSku" alias="GoodsSku"/>
+
+        <typeAlias type="com.mywork.sc.entity.ShopcartBean" alias="ShopcartBean"/>
+
+        <typeAlias type="com.mywork.sc.entity.ShopcartBeanList" alias="ShopcartBeanList"/>
+
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor" />
+    </plugins>
+
+    <mappers>
+        <!--
+        <mapper resource="com/mywork/sc/mapper/Users.xml"/>
+
+        <mapper resource="com/mywork/sc/mapper/CategoryMapper.xml"/>
+        -->
+        <package name="com.mywork.sc.mapper"/>
+    </mappers>
+</configuration>

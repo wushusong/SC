@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper创建，并设置名字，方便核心配置文件（mybatis）找到，名字就是该文件的全路径 -->
+<mapper namespace="com.mywork.sc.mapper.SearchMapper">
+
+    <resultMap id="GoodsBuild" type="Goods">
+        <id column="goods_id" property="goodsId"/>
+        <result column="cid" property="cid"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="keywords" property="keywords"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="sales_price" property="salesPrice"/>
+        <result column="is_sales" property="isSales"/>
+        <result column="is_new" property="isNew"/>
+        <result column="is_hot" property="isHot"/>
+        <result column="is_show" property="isShow"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="thumb_img" property="thumbImg"/>
+        <result column="goods_img" property="goodsImg"/>
+    </resultMap>
+
+    <select id="getGoodsByKey" parameterType="java.lang.String" resultMap="GoodsBuild">
+      select * from goods where goods_name LIKE "%${key}%"
+    </select>
+
+
+    <select id="getGoodsByLabel" parameterType="java.lang.String" resultMap="GoodsBuild">
+        select g.* from goods g INNER JOIN category c on g.cid = c.cid where ctitle like "%${keyLabel}%"
+    </select>
+
+</mapper>

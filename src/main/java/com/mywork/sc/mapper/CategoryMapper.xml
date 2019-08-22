@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper创建，并设置名字，方便核心配置文件（mybatis）找到，名字就是该文件的全路径 -->
+<mapper namespace="com.mywork.sc.mapper.CategoryMapper">
+
+    <resultMap id="categoryBuild" type="Category">
+        <id column="cid" property="cid"/>
+        <result column="ctitle" property="ctitle"/>
+        <result column="parent_id" property="parentId"/>
+        <collection property="subCategory" ofType="Category">
+            <id column="subcid" property="cid"/>
+            <result column="subctitle" property="ctitle"/>
+            <result column="subparent_id" property="parentId"/>
+        </collection>
+    </resultMap>
+
+    <select id="getCategoryAll" resultMap="categoryBuild">
+        select * from category_view
+    </select>
+
+</mapper>

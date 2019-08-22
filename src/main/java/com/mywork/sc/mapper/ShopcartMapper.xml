@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper创建，并设置名字，方便核心配置文件（mybatis）找到，名字就是该文件的全路径 -->
+<mapper namespace="com.mywork.sc.mapper.ShopcartMapper">
+
+    <resultMap id="getSB" type="ShopcartBean">
+        <!--<collection property="shopcartBeanList" ofType="ShopcartBean">-->
+            <result column="sku_id" property="skuId"/>
+            <result column="buy_num" property="buyNum"/>
+            <result column="goods_id" property="goodsId"/>
+            <result column="price" property="price"/>
+            <result column="num" property="num"/>
+            <result column="sku_name" property="skuName"/>
+            <result column="sku_properties" property="skuProperties"/>
+        <!--</collection>-->
+    </resultMap>
+
+    <select id="getShopcartBean" parameterType="java.lang.Integer" resultMap="getSB">
+        select * from cart_info_goods_sku where cart_id = #{cartId}
+    </select>
+
+    <resultMap id="getSB2" type="ShopcartBean">
+        <!--<collection property="shopcartBeanList" ofType="ShopcartBean">-->
+        <id column="goods_id" property="goodsId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="sales_price" property="salesPrice"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="buy_num" property="buyNum"/>
+        <result column="price" property="price"/>
+        <result column="sku_name" property="skuName"/>
+        <result column="sku_properties" property="skuProperties"/>
+        <result column="cart_id" property="cartId"/>
+        <collection property="attributeNameList" ofType="AttributeName">
+            <result column="attr_name_id" property="attrNameId"/>
+            <result column="attr_name" property="attrName"/>
+            <collection property="attributeValueList" ofType="AttributeValue">
+                <result column="attr_value_id" property="attrValueId"/>
+                <result column="attr_value" property="attrValue"/>
+            </collection>
+        </collection>
+    <!--</collection>-->
+    </resultMap>
+
+    <select id="getShopcartBean2"  resultMap="getSB2">
+        select * from view_all
+        <where>
+            <foreach collection="list" item="gs"  separator="or" >
+             CONCAT(attr_name_id,":",attr_value_id)
+                in (${gs.skuProperties})
+                and cart_id = #{cartId}
+                and sku_id = #{gs.skuId}
+            </foreach>
+        </where>
+    </select>
+
+</mapper>

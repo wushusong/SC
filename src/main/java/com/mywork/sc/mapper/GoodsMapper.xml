@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper创建，并设置名字，方便核心配置文件（mybatis）找到，名字就是该文件的全路径 -->
+<mapper namespace="com.mywork.sc.mapper.GoodsMapper">
+
+    <resultMap id="goodsDetail" type="Goods">
+        <!--<id column="goods_id" property="goodsId"/>
+        <result column="cid" property="cid"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="keywords" property="keywords"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="sales_price" property="salesPrice"/>
+        <result column="is_sales" property="isSales"/>
+        <result column="is_new" property="isNew"/>
+        <result column="is_hot" property="isHot"/>
+        <result column="is_show" property="isShow"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="thumb_img" property="thumbImg"/>
+        <result column="goods_img" property="goodsImg"/>
+        <result column="num" property="num"/>
+        <collection property="attributeNameList" ofType="AttributeName">
+            <id column="attr_name_id" property="attrNameId"/>
+            <result column="attr_name" property="attrName"/>
+            <collection property="attributeValueList" ofType="AttributeValue">
+                <id column="attr_value_id" property="attrValueId"/>
+                <result column="attr_value" property="attrValue"/>
+                <result column="sku_properties" property="skuProperties"/>
+            </collection>
+        </collection>-->
+
+        <!-- 组装商品的基本信息-->
+        <id column="goods_id" property="goodsId" />
+        <result column="cid" property="cid" />
+        <result column="goods_name" property="goodsName" />
+        <result column="sales_price" property="salesPrice" />
+        <result column="goods_img" property="goodsImg" />
+        <collection property="attributeNameList" ofType="AttributeName">
+            <id column="attr_name_id" property="attrNameId" />
+            <result column="attr_name" property="attrName" />
+            <collection property="attributeValueList" ofType="AttributeValue" >
+                <id column="attr_value_id" property="attrValueId" />
+                <result column="attr_value" property="attrValue" />
+            </collection>
+        </collection>
+
+    </resultMap>
+
+    <select id="goodsAttributeValue" parameterType="java.lang.Integer" resultMap="goodsDetail">
+        select * from goods_attribute_value where goods_id = #{goodsId}
+    </select>
+
+</mapper>
